@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — The Gate Keeper</title>
+<meta name="description" content="Privacy policy for The Gate Keeper, an offline TOTP/HOTP authenticator for Android. No account, no server, no analytics.">
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #ffffff;
+    --fg: #1b1b1f;
+    --muted: #55555f;
+    --rule: #d9d9e0;
+    --box-bg: #f5f5f8;
+    --accent: #2a4b8d;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #131316;
+      --fg: #e7e7ea;
+      --muted: #a5a5ae;
+      --rule: #33333a;
+      --box-bg: #1c1c21;
+      --accent: #9fb6e8;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 2.5rem 1.25rem 5rem;
+    background: var(--bg);
+    color: var(--fg);
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  main { max-width: 44rem; margin: 0 auto; }
+  h1 { font-size: 1.75rem; line-height: 1.25; margin: 0 0 .35rem; }
+  h2 { font-size: 1.15rem; margin: 2.25rem 0 .6rem; padding-top: 1.25rem; border-top: 1px solid var(--rule); }
+  h2:first-of-type { border-top: 0; padding-top: 0; }
+  p, li { margin: 0 0 .75rem; }
+  ul { padding-left: 1.25rem; }
+  a { color: var(--accent); }
+  code { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: .9em; }
+  .meta { color: var(--muted); font-size: .9rem; margin: 0 0 1.75rem; }
+  .summary {
+    background: var(--box-bg);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin: 0 0 2rem;
+  }
+  .summary p:last-child { margin-bottom: 0; }
+  table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+  th, td { text-align: left; vertical-align: top; padding: .5rem .6rem; border-bottom: 1px solid var(--rule); }
+  th { font-weight: 600; }
+  .table-wrap { overflow-x: auto; margin-bottom: 1rem; }
+  .lang { display: flex; gap: .5rem; margin: 0 0 2rem; }
+  .lang button {
+    font: inherit;
+    font-size: .9rem;
+    padding: .35rem .85rem;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+  }
+  .lang button[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+  footer { margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--rule); color: var(--muted); font-size: .9rem; }
+  [hidden] { display: none; }
+</style>
+</head>
+<body>
+<main>
+
+  <div class="lang" id="lang" hidden>
+    <button type="button" id="btn-en" aria-pressed="true">English</button>
+    <button type="button" id="btn-fr" aria-pressed="false">Français</button>
+  </div>
+
+  <!-- ============================ ENGLISH ============================ -->
+  <section id="en" lang="en">
+
+    <h1>Privacy Policy</h1>
+    <p class="meta">
+      The Gate Keeper — <code>bj.fasegiar.app.the_gate_keeper</code><br>
+      Last updated: <time id="updated-en" datetime="2026-09-08">8 September 2026</time>
+    </p>
+
+    <div class="summary">
+      <p><strong>The Gate Keeper collects no personal data.</strong> There is no account to create, no server that belongs to us, no analytics, no advertising and no crash reporting. Your two-factor secrets are generated, stored and used entirely on your device.</p>
+      <p>One network request exists in the whole application — an optional clock check that you start yourself, and that carries nothing about you. It is described in section 4.</p>
+    </div>
+
+    <h2>1. Data we collect</h2>
+    <p>None. The application does not collect, transmit, sell or share any personal data. It has no user account, no sign-in, no identifier attached to you, no usage statistics and no third-party analytics or advertising SDK.</p>
+    <p>Because nothing is collected, there is nothing for us to retain, disclose or hand over on request. Uninstalling the application removes its data from your device.</p>
+
+    <h2>2. What is stored on your device</h2>
+    <ul>
+      <li><strong>Your accounts</strong> — issuer, label and the TOTP/HOTP secret — are held in the system's encrypted storage, protected by a key held in the Android Keystore.</li>
+      <li><strong>Your codes</strong> are computed locally, on your device, following RFC 6238 (TOTP) and RFC 4226 (HOTP). Nothing is requested from a server to produce them.</li>
+      <li><strong>Automatic backup is switched off.</strong> The application declares <code>allowBackup="false"</code> and excludes everything from both cloud backup and device-to-device transfer. Your secrets are never copied to Google's cloud, and never travel automatically to a new phone.</li>
+    </ul>
+    <p>The consequence is deliberate, and you should know it: <strong>the encrypted export described in section 5 is the only way to recover your secrets</strong> if your device is lost, stolen, reset or replaced.</p>
+
+    <h2>3. Camera</h2>
+    <p>The camera is used on one screen only, to scan a setup QR code. The recognition model is bundled inside the application: decoding happens entirely on your device. No image is saved, no frame is transmitted, and nothing is sent to any recognition service.</p>
+    <p>Scanning is optional — accounts can always be added by typing them in. Permission: <code>CAMERA</code>.</p>
+
+    <h2>4. Network — one request, and you are the one who starts it</h2>
+    <p>The application can make exactly one kind of network request: a time query to a public NTP server, used to tell you whether your device's clock has drifted. A wrong clock is the most common reason a valid code is refused.</p>
+    <ul>
+      <li><strong>You trigger it.</strong> It happens only when you press the button on the screen dedicated to it — never at launch, never in the background, never as an automatic retry.</li>
+      <li><strong>It carries nothing about you.</strong> The packet is 48 bytes long. The application writes two fields and nothing else — one byte for the protocol mode, eight bytes for the send timestamp — and leaves the remaining 39 bytes at zero. It contains no account, no secret, no identifier, no device information.</li>
+      <li><strong>You are shown what will leave the device before you press.</strong> The screen states the destination and the size of the request.</li>
+      <li><strong>You can decline.</strong> The application is fully usable without ever comparing the clock, and it says so on that screen.</li>
+    </ul>
+    <p>The request goes to <code>time.cloudflare.com</code> on UDP port 123. As with any internet connection, that server sees the public IP address your request comes from. We run no server, receive no copy and store nothing about the request; what Cloudflare does with its public time service is governed by its own terms, not by this policy.</p>
+    <p>Permissions: <code>INTERNET</code>, and <code>ACCESS_NETWORK_STATE</code> — the latter only to tell "you have no network" apart from "the server did not answer".</p>
+
+    <h2>5. Encrypted export and import</h2>
+    <p>You can export your accounts at any time, as a single encrypted file.</p>
+    <ul>
+      <li>The file is encrypted with a passphrase <strong>you</strong> choose, using Argon2id key derivation and XChaCha20-Poly1305 authenticated encryption.</li>
+      <li>It is written straight to the destination you pick through the Android document picker. It is never uploaded, never sent to us, and no second copy is left behind on the device.</li>
+      <li><strong>The passphrase is never stored.</strong> It is not saved, not offered to a password manager and not recoverable — by you, by us, or by anyone. If you lose it, the file cannot be opened.</li>
+      <li>Once the file has left the application, it is under your control, wherever you chose to put it. If you place it in a cloud drive, that provider's terms apply to it.</li>
+    </ul>
+    <p>The same file can be imported back. Nothing is written to your vault until you have seen a preview and confirmed it.</p>
+
+    <h2>6. App lock</h2>
+    <p>The application can be locked behind your device's biometrics or screen-lock credential. It asks the system to authenticate you and receives only a yes or a no. Your fingerprint or face data never leaves the hardware enclave, and the application never sees it.</p>
+    <p>Permissions: <code>USE_BIOMETRIC</code>, <code>USE_FINGERPRINT</code>.</p>
+
+    <h2>7. Protection of what is on screen</h2>
+    <p>Screenshots, screen recordings and the app-switcher thumbnail are blocked on Android (<code>FLAG_SECURE</code>). On Android 12 and later, overlays drawn by other applications are hidden while The Gate Keeper is in the foreground (<code>HIDE_OVERLAY_WINDOWS</code>).</p>
+
+    <h2>8. Third-party components</h2>
+    <p>The application uses Google's ML Kit barcode scanning library for QR decoding, in its bundled form — the model ships inside the application and is not downloaded. Its usage-logging transport is removed from the application at build time, so it reports nothing.</p>
+    <p>No other component transmits anything. There is no advertising network, no analytics provider and no crash reporting service in this application.</p>
+
+    <h2>9. Permissions, in full</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Permission</th><th>Why it is requested</th></tr></thead>
+        <tbody>
+          <tr><td><code>CAMERA</code></td><td>Scanning a setup QR code, decoded on the device.</td></tr>
+          <tr><td><code>USE_BIOMETRIC</code><br><code>USE_FINGERPRINT</code></td><td>Unlocking the application. The second covers Android 8 and earlier.</td></tr>
+          <tr><td><code>INTERNET</code></td><td>The optional clock check of section 4, and nothing else.</td></tr>
+          <tr><td><code>ACCESS_NETWORK_STATE</code></td><td>Telling "no network" apart from "no answer" on that same screen.</td></tr>
+          <tr><td><code>HIDE_OVERLAY_WINDOWS</code></td><td>Hiding other applications' overlays while the app is open.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>10. Children</h2>
+    <p>The application is not directed at children, and collects no data from anyone, of any age.</p>
+
+    <h2>11. Changes to this policy</h2>
+    <p>Any change is published at this address, and the date shown at the top is the date this page was last published. If a future version of the application ever collects data — it does not today — this policy will say so before that version is released.</p>
+
+    <h2>12. Contact</h2>
+    <p>Questions about this policy: <a href="mailto:african.developer.journey@gmail.com">african.developer.journey@gmail.com</a></p>
+
+  </section>
+
+  <!-- ============================ FRANÇAIS ============================ -->
+  <section id="fr" lang="fr" hidden>
+
+    <h1>Politique de confidentialité</h1>
+    <p class="meta">
+      The Gate Keeper — <code>bj.fasegiar.app.the_gate_keeper</code><br>
+      Dernière mise à jour : <time id="updated-fr" datetime="2026-09-08">8 septembre 2026</time>
+    </p>
+
+    <div class="summary">
+      <p><strong>The Gate Keeper ne collecte aucune donnée personnelle.</strong> Aucun compte à créer, aucun serveur qui nous appartienne, aucune mesure d'audience, aucune publicité, aucun rapport de plantage. Vos secrets de double authentification sont produits, conservés et employés entièrement sur votre appareil.</p>
+      <p>Il n'existe qu'une seule requête réseau dans toute l'application — une comparaison d'horloge, facultative, que vous déclenchez vous-même et qui ne porte rien vous concernant. Elle est décrite à la section 4.</p>
+    </div>
+
+    <h2>1. Données collectées</h2>
+    <p>Aucune. L'application ne collecte, ne transmet, ne vend ni ne partage aucune donnée personnelle. Elle n'a ni compte utilisateur, ni connexion, ni identifiant rattaché à vous, ni statistiques d'usage, ni bibliothèque tierce de mesure ou de publicité.</p>
+    <p>Rien n'étant collecté, il n'y a rien que nous puissions conserver, communiquer ou remettre sur demande. Désinstaller l'application retire ses données de votre appareil.</p>
+
+    <h2>2. Ce qui est conservé sur votre appareil</h2>
+    <ul>
+      <li><strong>Vos comptes</strong> — émetteur, libellé et clé TOTP/HOTP — sont rangés dans le stockage chiffré du système, protégé par une clé détenue par le Keystore Android.</li>
+      <li><strong>Vos codes</strong> sont calculés localement, sur votre appareil, selon les RFC 6238 (TOTP) et RFC 4226 (HOTP). Rien n'est demandé à un serveur pour les produire.</li>
+      <li><strong>La sauvegarde automatique est fermée.</strong> L'application déclare <code>allowBackup="false"</code> et exclut tout, aussi bien de la sauvegarde dans le nuage que du transfert d'appareil à appareil. Vos secrets ne partent jamais chez Google, et ne voyagent jamais tout seuls vers un nouveau téléphone.</li>
+    </ul>
+    <p>La conséquence est assumée, et il faut la connaître : <strong>l'export chiffré décrit à la section 5 est le seul chemin de récupération de vos secrets</strong> en cas de perte, de vol, de réinitialisation ou de changement d'appareil.</p>
+
+    <h2>3. Caméra</h2>
+    <p>La caméra ne sert qu'à un seul écran : le scan d'un QR de configuration. Le modèle de reconnaissance est embarqué dans l'application, le décodage a donc lieu entièrement sur votre appareil. Aucune image n'est enregistrée, aucune trame n'est transmise, et rien n'est envoyé à un service de reconnaissance.</p>
+    <p>Le scan est facultatif — un compte peut toujours être saisi à la main. Permission : <code>CAMERA</code>.</p>
+
+    <h2>4. Réseau — une requête, et c'est vous qui la déclenchez</h2>
+    <p>L'application ne peut émettre qu'un seul type de requête réseau : une interrogation d'un serveur de temps public, pour vous dire si l'horloge de votre appareil a dérivé. Une horloge fausse est la première cause de refus d'un code pourtant valide.</p>
+    <ul>
+      <li><strong>Vous la déclenchez.</strong> Elle n'a lieu qu'à votre appui, sur l'écran qui ne fait que cela — jamais au démarrage, jamais en tâche de fond, jamais en réessai automatique.</li>
+      <li><strong>Elle ne porte rien vous concernant.</strong> Le paquet fait 48 octets. L'application n'en écrit que deux champs et rien d'autre — un octet pour le mode du protocole, huit pour l'horodatage d'envoi — et laisse les 39 autres à zéro. Aucun compte, aucune clé, aucun identifiant, aucune information sur l'appareil.</li>
+      <li><strong>Ce qui sortira vous est montré avant l'appui.</strong> L'écran annonce la destination et la taille de la requête.</li>
+      <li><strong>Refuser est une option.</strong> L'application s'emploie entièrement sans jamais comparer l'horloge, et elle l'écrit sur cet écran.</li>
+    </ul>
+    <p>La requête part vers <code>time.cloudflare.com</code>, sur le port UDP 123. Comme pour toute connexion Internet, ce serveur voit l'adresse IP publique d'où elle provient. Nous n'exploitons aucun serveur, n'en recevons aucune copie et n'en conservons rien ; ce que Cloudflare fait de son service de temps public relève de ses propres conditions, non de la présente politique.</p>
+    <p>Permissions : <code>INTERNET</code>, et <code>ACCESS_NETWORK_STATE</code> — cette dernière uniquement pour distinguer « vous n'avez pas de réseau » de « le serveur n'a pas répondu ».</p>
+
+    <h2>5. Export et import chiffrés</h2>
+    <p>Vous pouvez exporter vos comptes à tout moment, sous la forme d'un unique fichier chiffré.</p>
+    <ul>
+      <li>Le fichier est chiffré par une phrase de passe que <strong>vous</strong> choisissez, avec une dérivation Argon2id et un chiffrement authentifié XChaCha20-Poly1305.</li>
+      <li>Il est écrit directement à la destination que vous désignez dans le sélecteur de documents d'Android. Il n'est jamais téléversé, jamais envoyé chez nous, et aucun second exemplaire ne reste sur l'appareil.</li>
+      <li><strong>La phrase de passe n'est jamais conservée.</strong> Elle n'est ni enregistrée, ni proposée à un gestionnaire de mots de passe, ni récupérable — ni par vous, ni par nous, ni par personne. Perdue, le fichier ne s'ouvre plus.</li>
+      <li>Une fois le fichier sorti de l'application, il est sous votre garde, là où vous l'avez rangé. Déposé dans un espace de stockage en ligne, il relève des conditions de ce fournisseur.</li>
+    </ul>
+    <p>Le même fichier se réimporte. Rien n'est écrit dans votre coffre avant que vous ayez vu un aperçu et validé.</p>
+
+    <h2>6. Verrou d'application</h2>
+    <p>L'application peut se verrouiller derrière la biométrie ou le code de verrouillage de votre appareil. Elle demande au système de vous authentifier et n'en reçoit qu'un oui ou un non. Votre empreinte ou votre visage ne quitte jamais l'enclave du matériel, et l'application ne les voit jamais.</p>
+    <p>Permissions : <code>USE_BIOMETRIC</code>, <code>USE_FINGERPRINT</code>.</p>
+
+    <h2>7. Protection de ce qui est à l'écran</h2>
+    <p>Les captures d'écran, les enregistrements vidéo et la vignette du sélecteur d'applications sont bloqués sur Android (<code>FLAG_SECURE</code>). À partir d'Android 12, les calques dessinés par d'autres applications sont masqués tant que The Gate Keeper est au premier plan (<code>HIDE_OVERLAY_WINDOWS</code>).</p>
+
+    <h2>8. Composants tiers</h2>
+    <p>L'application emploie la bibliothèque de lecture de codes-barres ML Kit de Google pour le décodage des QR, dans sa forme embarquée — le modèle est livré dans l'application et n'est pas téléchargé. Son transport de journaux d'usage est retiré de l'application à la construction : il ne rapporte rien.</p>
+    <p>Aucun autre composant ne transmet quoi que ce soit. Il n'y a dans cette application ni régie publicitaire, ni service de mesure d'audience, ni collecteur de rapports de plantage.</p>
+
+    <h2>9. Les permissions, en entier</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Permission</th><th>Motif</th></tr></thead>
+        <tbody>
+          <tr><td><code>CAMERA</code></td><td>Scan d'un QR de configuration, décodé sur l'appareil.</td></tr>
+          <tr><td><code>USE_BIOMETRIC</code><br><code>USE_FINGERPRINT</code></td><td>Déverrouillage de l'application. La seconde couvre Android 8 et antérieur.</td></tr>
+          <tr><td><code>INTERNET</code></td><td>La comparaison d'horloge facultative de la section 4, et rien d'autre.</td></tr>
+          <tr><td><code>ACCESS_NETWORK_STATE</code></td><td>Distinguer « pas de réseau » de « pas de réponse », sur ce même écran.</td></tr>
+          <tr><td><code>HIDE_OVERLAY_WINDOWS</code></td><td>Masquer les calques d'autres applications pendant l'usage.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>10. Enfants</h2>
+    <p>L'application ne s'adresse pas aux enfants, et ne collecte aucune donnée de personne, quel que soit son âge.</p>
+
+    <h2>11. Modifications de cette politique</h2>
+    <p>Toute modification est publiée à cette adresse, et la date affichée en tête est celle de sa dernière publication. Si une version future de l'application venait à collecter des données — ce n'est pas le cas aujourd'hui — cette politique le dirait avant la publication de cette version.</p>
+
+    <h2>12. Contact</h2>
+    <p>Pour toute question sur cette politique : <a href="mailto:african.developer.journey@gmail.com">african.developer.journey@gmail.com</a></p>
+
+  </section>
+
+  <footer>
+    <p>The Gate Keeper — TOTP/HOTP authenticator. Everything stays on your device.</p>
+  </footer>
+
+</main>
+
+<script>
+  (function () {
+    var en = document.getElementById('en');
+    var fr = document.getElementById('fr');
+    var btnEn = document.getElementById('btn-en');
+    var btnFr = document.getElementById('btn-fr');
+    document.getElementById('lang').hidden = false;
+
+    // Date de publication : lue sur l'en-tête `Last-Modified` que GitHub Pages
+    // envoie (mesuré), et non recopiée à la main — une date figée pendant que le
+    // texte change dément la clause de la section 11, et l'oubli serait muet.
+    //
+    // DEUX gardes, et la seconde est la seule qui compte vraiment. Quand
+    // l'en-tête manque, `document.lastModified` ne rend pas une erreur : il rend
+    // l'HEURE COURANTE. La page afficherait alors « mise à jour aujourd'hui »
+    // tous les jours, sans jamais avoir l'air cassée — une fausse promesse, pire
+    // qu'une absence de promesse. Une valeur à moins de cinq minutes du
+    // chargement est donc REFUSÉE, et le <time> garde la date écrite en dur.
+    //
+    // Contrepartie assumée : un visiteur arrivant dans les minutes qui suivent
+    // une publication voit la date précédente. Une date en retard est un défaut
+    // qui se corrige au rechargement suivant ; une date fausse, non.
+    var FLOOR = Date.parse('2026-09-08T00:00:00Z');
+
+    function publishedAt() {
+      var t = Date.parse(document.lastModified);
+      if (isNaN(t)) return null;
+      if (t < FLOOR) return null;
+      if (Math.abs(Date.now() - t) < 300000) return null;
+      return new Date(t);
+    }
+
+    function stampDate(lang) {
+      var when = publishedAt();
+      if (!when) return;
+      var el = document.getElementById('updated-' + lang);
+      if (!el) return;
+      el.textContent = new Intl.DateTimeFormat(lang === 'fr' ? 'fr-FR' : 'en-GB', {
+        day: 'numeric', month: 'long', year: 'numeric'
+      }).format(when);
+      el.setAttribute('datetime', when.toISOString().slice(0, 10));
+    }
+
+    function show(lang) {
+      var isFr = lang === 'fr';
+      fr.hidden = !isFr;
+      en.hidden = isFr;
+      btnFr.setAttribute('aria-pressed', String(isFr));
+      btnEn.setAttribute('aria-pressed', String(!isFr));
+      document.documentElement.lang = isFr ? 'fr' : 'en';
+      stampDate(isFr ? 'fr' : 'en');
+    }
+
+    btnEn.addEventListener('click', function () { show('en'); });
+    btnFr.addEventListener('click', function () { show('fr'); });
+
+    stampDate('en');
+    if ((navigator.language || 'en').toLowerCase().indexOf('fr') === 0) show('fr');
+  })();
+</script>
+
+<noscript>
+  <style>#fr[hidden] { display: block; }</style>
+</noscript>
+
+</body>
+</html>
